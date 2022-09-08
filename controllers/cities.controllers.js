@@ -2,19 +2,38 @@ const mongoose = require('mongoose')
 const CitiesModel = require('../models/Cities.model')
 
 exports.getAllCities = async (req, res, next) => { 
-    try {
-		const { page = 1, limit } = req.query;
-
-		const data = await CitiesModel.find()
-			.limit(limit * 1)
-			.skip((page - 1) * limit)
-			.sort({ createdAt: -1 })
-		const total = await CitiesModel.find().count();
-		const pages = limit === undefined ? 1 : Math.ceil(total / limit);
-		res.json({ total: total, pages, status: 200, data });
-	} catch (error) {
-		res.status(500).json(error);
-	}
+	const{page=1,limit=10}=req.query
+	const total = await CitiesModel.find().countDocuments();
+	await CitiesModel.aggregate(
+	[ 
+		 {$sort:{createdAt: -1} },
+		 {$skip:(page - 1) * limit},
+		 {$limit:limit*1}, 
+		 {
+            $lookup:{
+				from:'properties',
+				localField:"_id",
+				foreignField:'city_id',
+				as:'property_count'
+			}, 
+			
+		}, 
+		{
+			$addFields: { property_count: { $size: "$property_count" } }  
+		},
+		{
+			$project:{
+				name:true,city_description:true,image_url:true,property_count:true,
+                createdAt:true,updatedAt:true
+			} 
+		},
+	
+	],
+	(err,response)=>{
+	if(err)res.json(err);
+	const pages = limit === undefined ? 1 : Math.ceil(total / limit);
+	res.json({ total,pages, status: 200, response })
+}) 
 }
 
 exports.create = async (req, res) => {
@@ -29,7 +48,7 @@ exports.create = async (req, res) => {
             res.status(500).json({message: err})
         } else {
             res.status(200).json({
-                message: 'City created',
+                message: 'new city created',
                 data
             })
         }
@@ -47,7 +66,9 @@ exports.getSingleCity = async (req, res) => {
             res.status(200).json(data)
         }
     }).clone()
+
 }
+
 
 exports.updateCity = async (req, res) => {
     await CitiesModel.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body })

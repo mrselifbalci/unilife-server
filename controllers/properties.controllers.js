@@ -1,12 +1,13 @@
 const PropertiesModel = require('../models/Properties.model');
 const mongoose = require('mongoose');
+const CitiesModel = require('../models/Cities.model')
 
 exports.getAll =async (req,res)=>{
 	try {
 		const { page = 1, limit } = req.query;
 
 		const data = await PropertiesModel.find()
-		    .populate('city_id')
+		    .populate('city_id','name')
 			.limit(limit * 1)
 			.skip((page - 1) * limit)
 			.sort({ createdAt: -1 })
@@ -24,13 +25,15 @@ exports.create = async (req, res) => {
 		key_features: req.body.key_features,
 		property_type: req.body.property_type,
 		property_description: req.body.property_description,
-        bedroom: req.body.bedroom,
-        bathroom: req.body.bathroom,
+        bedroom_number: req.body.bedroom_number,
+        bathroom_number: req.body.bathroom_number,
         deposit: req.body.deposit,
         rent: req.body.rent,
         availability: req.body.availability,
         address: req.body.address,
         images: req.body.images,
+		furnished:req.body.furnished,
+		bedroom_prices:req.body.bedroom_prices
 	}); 
 
 	newPost
@@ -60,14 +63,44 @@ exports.getSingleProperty = async (req, res) => {
 
 
 exports.getPropertiesByCityId = async (req, res) => {
-	await PropertiesModel.find({ city_id: req.params.cityid }, (err, data) => { 
-		if (err) {
-			res.json({ status: false, message: err });
-		} else {
-			res.json({ status: 200, data });
-		}
-	}).clone()
-	.populate('city_id')
+	const{page=1,limit=10}=req.query
+	const total = await PropertiesModel.find({ city_id: req.params.city_id }).countDocuments();
+    const city = await CitiesModel.findById({ _id: req.params.city_id })
+	const city_description = city.city_description
+	await PropertiesModel.aggregate(
+		[ 
+			{
+				$match: {  city_id: mongoose.Types.ObjectId(req.params.city_id) } 
+			},
+			{$sort:{createdAt: -1}},  
+		    {$skip:(page - 1) * limit}, 
+		    {$limit:limit*1},
+			{
+				$project:{
+					// city_id:true,
+		            key_features:true,
+					property_type:true,
+					property_description:true,
+					bedroom_number:true,
+					bathroom_number:true,
+					deposit:true,
+					rent:true,
+					availability:true,
+					address:true,
+					images:true,
+					furnished:true,
+					bedroom_prices:true
+				} 
+			},
+		
+		],
+		(err,response)=>{
+		if(err)res.json(err);
+		res.json({status: 200, total,city_description,response })
+	}) 
+
+
+
 };
 
 exports.updateProperty = async (req, res) => {
