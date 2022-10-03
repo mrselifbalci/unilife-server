@@ -23,7 +23,7 @@ exports.getAllCities = async (req, res, next) => {
 		},
 		{
 			$project:{
-				name:true,city_description:true,image_url:true,property_count:true,
+				name:true,universities:true,student_life:true,image_url:true,property_count:true,
                 createdAt:true,updatedAt:true
 			} 
 		},
@@ -39,7 +39,8 @@ exports.getAllCities = async (req, res, next) => {
 exports.create = async (req, res) => {
     const newCity = await new CitiesModel({
         name: req.body.name,
-		city_description: req.body.city_description,
+		universities:req.body.universities,
+		student_life:req.body.student_life,
 		image_url: req.body.image_url,
     })
 
@@ -59,14 +60,36 @@ exports.create = async (req, res) => {
 
 
 exports.getSingleCity = async (req, res) => {
-    await CitiesModel.findOne({_id: req.params.id}, (err, data) => {
-        if(err) {
-            res.status(500).json({message: err})
-        } else {
-            res.status(200).json(data)
-        }
-    }).clone()
 
+	await CitiesModel.aggregate(
+		[
+			{
+				$match: { _id: mongoose.Types.ObjectId(req.params.id) }
+			},
+			{$sort:{createdAt: -1} },
+			{
+			   $lookup:{
+				   from:'properties',
+				   localField:"_id",
+				   foreignField:'city_id',
+				   as:'property_count'
+			   }, 
+			   
+		   }, 
+		   {
+			   $addFields: { property_count: { $size: "$property_count" } }  
+		   },
+		   {
+			   $project:{
+				   name:true,universities:true,student_life:true,image_url:true,property_count:true,
+				   createdAt:true,updatedAt:true
+			   } 
+		   },
+		],
+		(err,data)=>{ 
+			if(err)res.json(err);
+			res.json({data})
+		})
 }
 
 

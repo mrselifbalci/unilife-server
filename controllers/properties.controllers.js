@@ -70,7 +70,7 @@ exports.getPropertiesByCityId = async (req, res) => {
 	await PropertiesModel.aggregate(
 		[ 
 			{
-				$match: {  city_id: mongoose.Types.ObjectId(req.params.city_id) } 
+				$match: {city_id: mongoose.Types.ObjectId(req.params.city_id)} 
 			},
 			{$sort:{createdAt: -1}},  
 		    {$skip:(page - 1) * limit}, 

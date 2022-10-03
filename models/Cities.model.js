@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const CitiesSchema = new Schema({
     name: {type:String, required:true, unique:true},
-    city_description: {type:String},
+    universities: {type:String},
+    student_life: {type:String},
     image_url:{type:String}
 },{timestamps:true})
 
