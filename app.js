@@ -8,6 +8,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var citiesRouter = require('./routes/cities.routes.js');
 var propertiesRouter = require('./routes/properties.routes.js');
+var subscriptionsRouter = require('./routes/subscriptions.routes.js');
 
 var app = express();
 
@@ -28,6 +29,8 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/', citiesRouter);
 app.use('/', propertiesRouter);
+app.use('/', subscriptionsRouter);
+
 
 
 
