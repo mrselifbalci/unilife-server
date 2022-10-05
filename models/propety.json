@@ -1,0 +1,217 @@
+[
+    {
+        "city_id": "633a96926893d471a68cc889",
+        "key_features": [
+            "Energy Rating C",
+            "One Double Bedroom",
+            "Furnished to a High Standard",
+            "Lift & Secure Entrance",
+            "City Centre Location"
+        ],
+        "property_type": "semi-detached",
+        "property_description": "We are proud to bring to the market this well presented home in Sheffield. This home is perfect for professionals or students for high quality, City Centre living",
+        "bedroom_count": 3,
+        "bathroom_count": 1,
+        "deposit": 400,
+        "rent":200 ,
+        "availability": "September",
+        "address": {
+            "street": "Willoughby Mews",
+            "city": "Sheffield",
+            "postcode":"S6 E4"
+        },
+        "images": [
+            "http://res.cloudinary.com/blackeagle4894/image/upload/v1617788935/jivyt3yifrohglwvivgi.jpg",
+            "http://res.cloudinary.com/blackeagle4894/image/upload/v1617788939/kwjcpi41ucs5cpx5bt9f.jpg",
+            "http://res.cloudinary.com/blackeagle4894/image/upload/v1617788941/ktg9xogqtxwn8lbngfkj.jpg",
+            "http://res.cloudinary.com/blackeagle4894/image/upload/v1617789347/fjufojqnk7smjgo2jv9d.jpg"
+        ],
+        "furnished": "Partly Furnished",
+        "bedroom_prices": {
+            "bedroom_one": 200,
+            "bedroom_two": 170,
+            "bedroom_three": 170
+        }
+  },
+  {
+    "city_id": "633a96926893d471a68cc889",
+    "key_features": [
+        "Energy Rating C",
+        "One Double Bedroom",
+        "Furnished to a High Standard",
+        "Lift & Secure Entrance",
+        "City Centre Location"
+    ],
+    "property_type": "detached",
+    "property_description": "We are proud to bring to the market this well presented home in Sheffield. This home is perfect for professionals or students for high quality, City Centre living",
+    "bedroom_count": 4,
+    "bathroom_count": 2,
+    "deposit": 800,
+    "rent":700 ,
+    "availability": "September",
+    "address": {
+        "street": "Willoughby Mews",
+        "city": "Sheffield",
+        "postcode":"S6 E4"
+    },
+    "images": [
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617789359/sokpun6lzeeyrl51sjdm.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790096/npfkcpjxz75jvt97xvgt.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790100/p94n9kiwm6aefhd4gjtu.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790102/t6fo9fpksnrqqxlipbzd.jpg"
+    ],
+    "furnished": "Unfurnished",
+    "bedroom_prices": {
+        "bedroom_one": 200,
+        "bedroom_two": 200,
+        "bedroom_three": 200,
+        "bedroom_four": 200
+    }
+},
+{
+    "city_id": "633a96926893d471a68cc889",
+    "key_features": [
+        "Energy Rating C",
+        "One Double Bedroom",
+        "Furnished to a High Standard",
+        "Lift & Secure Entrance",
+        "City Centre Location"
+    ],
+    "property_type": "detached",
+    "property_description": "We are proud to bring to the market this well presented home in Sheffield. This apartment is perfect for professionals or students for high quality, City Centre living",
+    "bedroom_count": 5,
+    "bathroom_count": 3,
+    "deposit": 800,
+    "rent":700 ,
+    "availability": "September",
+    "address": {
+        "street": "Willoughby Mews",
+        "city": "Sheffield",
+        "postcode":"S6 E4"
+    },
+    "images": [
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790105/azeulo8hpajtg4tfae8p.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790908/i1gup95lkgviw1tcvrgz.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790911/vrnhualrhoue7wghurl7.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790913/txw6knkpqghk4jvhmpdx.jpg"
+    ],
+    "furnished": "Unfurnished",
+    "bedroom_prices": {
+        "bedroom_one": 200,
+        "bedroom_two": 170,
+        "bedroom_three": 170,
+        "bedroom_four": 170,
+        "bedroom_five": 170
+    }
+},
+{
+    "city_id": "633a96926893d471a68cc889",
+    "key_features": [
+        "Energy Rating C",
+        "One Double Bedroom",
+        "Furnished to a High Standard",
+        "Lift & Secure Entrance",
+        "City Centre Location"
+    ],
+    "property_type": "apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Sheffield. This apartment is perfect for professionals or students for high quality, City Centre living",
+    "bedroom_count": 6,
+    "bathroom_count": 3,
+    "deposit": 900,
+    "rent":900 ,
+    "availability": "September",
+    "address": {
+        "street": "Willoughby Mews",
+        "city": "Sheffield",
+        "postcode":"S6 E4"
+    },
+    "images": [
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790920/drovnx8q1xtwefhmaitl.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841080/rhem5vqt0fzyoit4wksx.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841083/vhyhjyxpmlbjwjltdgx6.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841087/gynanius5q6zlph4z6ih.jpg"
+    ],
+    "furnished": "Unfurnished",
+    "bedroom_prices": {
+        "bedroom_one": 200,
+        "bedroom_two": 170,
+        "bedroom_three": 170,
+        "bedroom_four": 200,
+        "bedroom_five": 170,
+        "bedroom_six": 170
+    }
+},
+{
+    "city_id": "633a96926893d471a68cc889",
+    "key_features": [
+        "Energy Rating C",
+        "One Double Bedroom",
+        "Furnished to a High Standard",
+        "Lift & Secure Entrance",
+        "City Centre Location"
+    ],
+    "property_type": "apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Sheffield. This apartment is perfect for professionals or students for high quality, City Centre living",
+    "bedroom_count": 4,
+    "bathroom_count": 2,
+    "deposit": 600,
+    "rent":400 ,
+    "availability": "September",
+    "address": {
+        "street": "Willoughby Mews",
+        "city": "Sheffield",
+        "postcode":"S6 E4"
+    },
+    "images": [
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841092/adufsselh6ljdk3vgesw.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841128/nsxy8evcp2ajlzhqudrl.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841131/uzampzr8us21hlolymsp.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841135/vlycxawgaul9ky5nzlrn.jpg"
+    ],
+    "furnished": "Unfurnished",
+    "bedroom_prices": {
+        "bedroom_one": 200,
+        "bedroom_two": 170,
+        "bedroom_three": 170,
+        "bedroom_four": 170
+    }
+},
+{
+    "city_id": "633a96926893d471a68cc889",
+    "key_features": [
+        "Energy Rating C",
+        "One Double Bedroom",
+        "Furnished to a High Standard",
+        "Lift & Secure Entrance",
+        "City Centre Location"
+    ],
+    "property_type": "apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Sheffield. This apartment is perfect for professionals or students for high quality, City Centre living",
+    "bedroom_count": 7,
+    "bathroom_count": 3,
+    "deposit": 1000,
+    "rent":1000 ,
+    "availability": "September",
+    "address": {
+        "street": "Willoughby Mews",
+        "city": "Sheffield",
+        "postcode":"S6 E4"
+    },
+    "images": [
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840773/v8dogu9zibinltwtngru.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840835/v03j252lumt4qpsrpjj3.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840839/nbakhtbigw4af3xtcacd.jpg",
+        "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840840/uuela4vz27tm8dg4qtty.jpg"
+    ],
+    "furnished": "Furnished",
+    "bedroom_prices": {
+        "bedroom_one": 200,
+        "bedroom_two": 170,
+        "bedroom_three": 170,
+        "bedroom_four": 200,
+        "bedroom_five": 170,
+        "bedroom_six": 170,
+        "bedroom_seven": 200
+    }
+}
+]

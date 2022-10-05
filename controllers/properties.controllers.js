@@ -48,6 +48,28 @@ exports.create = async (req, res) => {
 		.catch((err) => res.json({ status: false, message: err }));
 };
 
+exports.createMany= async (req,res) => {
+	
+	  const propertiesArray = req.body;
+
+	  const data = await PropertiesModel.insertMany(propertiesArray)
+	  .then((data) =>
+		  res.json({
+			  status: 200,
+			  message: 'Multiple properties are created successfully',
+			  data,
+		  })
+	  )
+	  .catch((err) => res.json({ status: false, message: err }));
+
+  };
+
+
+
+
+
+
+
 exports.getSingleProperty = async (req, res) => { 	
 	await PropertiesModel.findOne({ _id: req.params.id }, (err, data) => {
 		if (err) {
