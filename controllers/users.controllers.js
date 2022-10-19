@@ -17,7 +17,7 @@ exports.getAllUsers = async (req, res) => {
 			} 
 		},
 		{
-			 $skip:(page - 1) * limit 
+			 $skip:(page - 1) * limit  
 		},
 		{
 			 $limit:limit*1 
