@@ -9,6 +9,11 @@ var indexRouter = require('./routes/index');
 var citiesRouter = require('./routes/cities.routes.js');
 var propertiesRouter = require('./routes/properties.routes.js');
 var subscriptionsRouter = require('./routes/subscriptions.routes.js');
+var usersRouter = require('./routes/users.routes');
+
+//middlewares
+const verifyToken = require('./auth/verifyToken');
+// const isAdmin = require('./auth/isAdmin'); 
 
 var app = express();
 
@@ -30,6 +35,7 @@ app.use('/', indexRouter);
 app.use('/', citiesRouter);
 app.use('/', propertiesRouter);
 app.use('/', subscriptionsRouter);
+app.use('/', usersRouter);
 
 
 
