@@ -88,11 +88,12 @@ exports.createShortlistedProperty = async (req, res) => {
 		await ShortlistedPropertiesModel.find({property_id:req.body.property_id,user_id:req.body.user_id})
 		.populate('property_id') 
 		.then(async data=>{ 
-			if(data.length>0){ 
+			if(data.length>0){  
                 ShortlistedPropertiesModel.findByIdAndDelete({ _id: data[0]._id })
                 .then((data) => res.json({ status: 200,message:"Removed from shortlist", data }))
                 .catch((err) => res.json({ status: false, message: err }));
 			}else{ 
+				
 				const newUserFavorite = await new ShortlistedPropertiesModel({
 					property_id,
 					user_id
