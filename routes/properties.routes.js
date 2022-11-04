@@ -8,8 +8,9 @@ router.get('/properties/:id', propertiesControllers.getSingleProperty);
 router.get('/properties/city/:city_id', propertiesControllers.getPropertiesByCityId);
 router.post('/properties', propertiesControllers.create);
 router.post('/properties/many', propertiesControllers.createMany);
+router.post('/properties/filter', propertiesControllers.getWithQuery);
 router.patch('/properties/:id', propertiesControllers.updateProperty);
 router.delete('/properties/:id', propertiesControllers.removeSingleProperty);  
 
  
-module.exports = router;  
+module.exports = router;   

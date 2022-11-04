@@ -93,7 +93,7 @@ exports.createShortlistedProperty = async (req, res) => {
                 .then((data) => res.json({ status: 200,message:"Removed from shortlist", data }))
                 .catch((err) => res.json({ status: false, message: err }));
 			}else{ 
-				
+				 
 				const newUserFavorite = await new ShortlistedPropertiesModel({
 					property_id,
 					user_id
@@ -120,7 +120,7 @@ exports.checkExistence = async (req, res, next) => {
 };
   
  
-
+ 
 exports.updateShortlistedProperty = async (req, res) => {
 	await ShortlistedPropertiesModel.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body })
 		.then((data) => res.json({ message: 'Successfully updated', data }))

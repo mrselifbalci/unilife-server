@@ -53,7 +53,7 @@ exports.createMany= async (req,res) => {
 	  const propertiesArray = req.body;
 
 	  const data = await PropertiesModel.insertMany(propertiesArray)
-	  .then((data) =>
+	  .then((data) =>  
 		  res.json({
 			  status: 200,
 			  message: 'Multiple properties are created successfully',
@@ -90,7 +90,7 @@ exports.getPropertiesByCityId = async (req, res) => {
     const city = await CitiesModel.findById({ _id: req.params.city_id })
 	const city_description = city.city_description
 	await PropertiesModel.aggregate(
-		[ 
+		[  
 			{
 				$match: {city_id: mongoose.Types.ObjectId(req.params.city_id)} 
 			},
@@ -136,3 +136,19 @@ exports.removeSingleProperty = async (req, res) => {
 	.then((data) => res.json(data))
 	.catch((err) => res.json({ message: err }));
 }; 
+
+exports.getWithQuery = async (req, res, next) => {
+   if(!req.body.query.city_id){
+	res.json({status:404,message:"Provide city id"})
+   }else{
+		try {
+			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
+			const response = await PropertiesModel.find(query)
+			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
+		} catch (error) {
+			next({ status: 404, message: error });
+		}
+   }
+
+};
+ 
