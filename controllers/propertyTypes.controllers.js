@@ -23,7 +23,7 @@ exports.getAll = async (req, res, next) => {
 		},
 		{
 			$project:{
-				name:true,property_count:true
+				name:true,property_count:true,_id:false
 			} 
 		},
 	
