@@ -11,6 +11,7 @@ var propertiesRouter = require('./routes/properties.routes.js');
 var subscriptionsRouter = require('./routes/subscriptions.routes.js');
 var usersRouter = require('./routes/users.routes');
 var shortlistedPropertiesRouter = require('./routes/shortlistedProperties.routes');
+var propertyTypesRouter = require('./routes/propertyTypes.routes.js');
 
 //middlewares
 const verifyToken = require('./auth/verifyToken');
@@ -38,6 +39,7 @@ app.use('/', propertiesRouter);
 app.use('/', subscriptionsRouter);
 app.use('/', usersRouter);
 app.use('/', shortlistedPropertiesRouter);
+app.use('/', propertyTypesRouter);
 
 
 
