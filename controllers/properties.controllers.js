@@ -149,7 +149,7 @@ exports.getWithQuery = async (req, res, next) => {
 				{city_id:req.body.query.city_id},
 				{bedroom_count:{$gte:req.body.query.bedroom_count}},
 				{bathroom_count:{$gte:req.body.query.bathroom_count}},
-				{property_type:{$gte:req.body.query.property_type}}
+				{property_type:req.body.query.property_type}
 			]}
 			)
 			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
@@ -164,7 +164,7 @@ exports.getWithQuery = async (req, res, next) => {
 				{city_id:req.body.query.city_id},
 				{bedroom_count:{$gte:req.body.query.bedroom_count}},
 				{bathroom_count:{$gte:req.body.query.bathroom_count}},
-				{property_type:{$gte:req.body.query.property_type}}
+				{property_type:req.body.query.property_type}
 			]}
 			)
 			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
