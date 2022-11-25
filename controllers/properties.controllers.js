@@ -138,10 +138,27 @@ exports.removeSingleProperty = async (req, res) => {
 }; 
 
 exports.getWithQuery = async (req, res, next) => {
+	console.log(req.body.query)
 	const myRent = +req.body.query.rent
    if(!req.body.query.city_id){
-	res.json({status:404,message:"Provide city id"}) 
-   }else if(!myRent){
+	res.json({status:404,message:"Provide the city id."}) 
+   }else if(!req.body.query.property_type && !myRent){
+	console.log('ikisi de yok')
+		try {
+			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
+			const response = await PropertiesModel.find(
+			{$and:[
+				{city_id:req.body.query.city_id},
+				{bedroom_count:{$gte:req.body.query.bedroom_count}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+			]}
+			)
+			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
+		} catch (error) {
+			next({ status: 404, message: error });
+		}
+   }else if(req.body.query.property_type && !myRent){
+	console.log('sadece rent yok')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
@@ -156,15 +173,33 @@ exports.getWithQuery = async (req, res, next) => {
 		} catch (error) {
 			next({ status: 404, message: error });
 		}
-   }else{
+   }else if(!req.body.query.property_type && myRent){
+        console.log('sadece type yok')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
-			 {$and:[{rent:{$lte:myRent}},
+			{$and:[
 				{city_id:req.body.query.city_id},
 				{bedroom_count:{$gte:req.body.query.bedroom_count}},
 				{bathroom_count:{$gte:req.body.query.bathroom_count}},
-				{property_type:req.body.query.property_type}
+				{rent:{$lte:myRent}}
+			]}
+			)
+			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
+		} catch (error) {
+			next({ status: 404, message: error });
+		}
+   }else{
+	console.log('ikisi de var')
+		try {
+			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
+			const response = await PropertiesModel.find(
+			{$and:[
+				{city_id:req.body.query.city_id},
+				{bedroom_count:{$gte:req.body.query.bedroom_count}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+				{property_type:req.body.query.property_type},
+				{rent:{$lte:myRent}}
 			]}
 			)
 			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
