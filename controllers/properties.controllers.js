@@ -88,7 +88,7 @@ exports.getPropertiesByCityId = async (req, res) => {
 	const{page=1,limit=10}=req.query
 	const total = await PropertiesModel.find({ city_id: req.params.city_id }).countDocuments();
     const city = await CitiesModel.findById({ _id: req.params.city_id })
-	const city_description = city.city_description
+	const city_name = city.name
 	await PropertiesModel.aggregate(
 		[  
 			{
@@ -118,7 +118,7 @@ exports.getPropertiesByCityId = async (req, res) => {
 		],
 		(err,response)=>{
 		if(err)res.json(err);
-		res.json({status: 200, total,city_description,response })
+		res.json({status: 200, total,city_name,response })
 	}) 
 
 
