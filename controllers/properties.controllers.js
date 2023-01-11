@@ -1,6 +1,7 @@
 const PropertiesModel = require('../models/Properties.model');
 const mongoose = require('mongoose');
 const CitiesModel = require('../models/Cities.model')
+ObjectId = mongoose.Types.ObjectId;
 
 exports.getAll =async (req,res)=>{
 	try {
@@ -70,26 +71,29 @@ exports.createMany= async (req,res) => {
 
 
 
-exports.getSingleProperty = async (req, res) => { 	
+exports.getSingleProperty = async (req, res) => {  	
+	if(!ObjectId.isValid(req.params.id))return;
 	await PropertiesModel.findOne({ _id: req.params.id }, (err, data) => {
 		if (err) {
 			res.json({ message: err }); 
 		} else {
 			res.json(data)
 			
-		}   
+		}    
 	}).clone()
     .populate('city_id')
 }
 
-
+ 
 
 exports.getPropertiesByCityId = async (req, res) => {
+	if(!ObjectId.isValid(req.params.city_id))return;
+ 
 	const{page=1,limit=10}=req.query
 	const total = await PropertiesModel.find({ city_id: req.params.city_id }).countDocuments();
     const city = await CitiesModel.findById({ _id: req.params.city_id })
 	const city_name = city.name
-	await PropertiesModel.aggregate(
+	await PropertiesModel.aggregate( 
 		[  
 			{
 				$match: {city_id: mongoose.Types.ObjectId(req.params.city_id)} 
@@ -126,24 +130,24 @@ exports.getPropertiesByCityId = async (req, res) => {
 };
 
 exports.updateProperty = async (req, res) => {
+	if(!ObjectId.isValid(req.params.id))return;
 	await PropertiesModel.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body })
 		.then((data) => res.json({ message: 'Successfully updated', data }))
 		.catch((err) => res.json({ message: err }));
 };
 
 exports.removeSingleProperty = async (req, res) => {
+	if(!ObjectId.isValid(req.params.id))return;
 	await PropertiesModel.findByIdAndDelete({ _id: req.params.id })
 	.then((data) => res.json(data))
 	.catch((err) => res.json({ message: err }));
 }; 
 
 exports.getWithQuery = async (req, res, next) => {
-	console.log(req.body.query)
 	const myRent = +req.body.query.rent
    if(!req.body.query.city_id){
 	res.json({status:404,message:"Provide the city id."}) 
    }else if(!req.body.query.property_type && !myRent){
-	console.log('ikisi de yok')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
@@ -158,7 +162,6 @@ exports.getWithQuery = async (req, res, next) => {
 			next({ status: 404, message: error });
 		}
    }else if(req.body.query.property_type && !myRent){
-	console.log('sadece rent yok')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
@@ -174,7 +177,6 @@ exports.getWithQuery = async (req, res, next) => {
 			next({ status: 404, message: error });
 		}
    }else if(!req.body.query.property_type && myRent){
-        console.log('sadece type yok')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
@@ -190,7 +192,6 @@ exports.getWithQuery = async (req, res, next) => {
 			next({ status: 404, message: error });
 		}
    }else{
-	console.log('ikisi de var')
 		try {
 			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
 			const response = await PropertiesModel.find(
