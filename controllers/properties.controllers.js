@@ -144,70 +144,34 @@ exports.removeSingleProperty = async (req, res) => {
 }; 
 
 exports.getWithQuery = async (req, res, next) => {
-	const myRent = +req.body.query.rent
-   if(!req.body.query.city_id){
-	res.json({status:404,message:"Provide the city id."}) 
-   }else if(!req.body.query.property_type && !myRent){
-		try {
-			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
-			const response = await PropertiesModel.find(
-			{$and:[
-				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
-			]}
-			)
-			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
-		} catch (error) {
-			next({ status: 404, message: error });
-		}
-   }else if(req.body.query.property_type && !myRent){
-		try {
-			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
-			const response = await PropertiesModel.find(
-			{$and:[
-				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
-				{property_type:req.body.query.property_type}
-			]}
-			)
-			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
-		} catch (error) {
-			next({ status: 404, message: error });
-		}
-   }else if(!req.body.query.property_type && myRent){
-		try {
-			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
-			const response = await PropertiesModel.find(
-			{$and:[
-				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
-				{rent:{$lte:myRent}}
-			]}
-			)
-			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
-		} catch (error) {
-			next({ status: 404, message: error });
-		}
-   }else{
-		try {
-			const  query  = typeof req.body.query==="string" ?  JSON.parse(req.body.query) : req.body.query
-			const response = await PropertiesModel.find(
-			{$and:[
-				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
-				{property_type:req.body.query.property_type},
-				{rent:{$lte:myRent}}
-			]}
-			)
-			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
-		} catch (error) {
-			next({ status: 404, message: error });
-		}
-   }
-
-};
+	const { city_id, property_type, bedroom_count, bathroom_count } = req.body.query;
+	const myRent = +req.body.query.rent;
+	
+	if (!city_id) {
+	  res.json({ status: 404, message: "Provide the city id." });
+	  return;
+	}
+	
+	const andConditions = [
+	  { city_id },
+	  { bedroom_count: { $gte: bedroom_count || 0 } },
+	  { bathroom_count: { $gte: bathroom_count || 0 } },
+	];
+  
+	if (property_type && myRent) {
+	  andConditions.push({ property_type }, { rent: { $lte: myRent } });
+	} else if (property_type) {
+	  andConditions.push({ property_type });
+	} else if (myRent) {
+	  andConditions.push({ rent: { $lte: myRent } });
+	}
+  
+	try {
+	  const response = await PropertiesModel.find({ $and: andConditions });
+	  res.json({ status: 200, message: "Filtered Properties", count: response.length, response });
+	} catch (error) {
+	  next({ status: 404, message: error });
+	}
+  };
+  
  
