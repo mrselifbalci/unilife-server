@@ -153,8 +153,8 @@ exports.getWithQuery = async (req, res, next) => {
 			const response = await PropertiesModel.find(
 			{$and:[
 				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
 			]}
 			)
 			res.json({status:200,message: 'Filtered Properties',count:response.length, response }); 
@@ -167,8 +167,8 @@ exports.getWithQuery = async (req, res, next) => {
 			const response = await PropertiesModel.find(
 			{$and:[
 				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
 				{property_type:req.body.query.property_type}
 			]}
 			)
@@ -182,8 +182,8 @@ exports.getWithQuery = async (req, res, next) => {
 			const response = await PropertiesModel.find(
 			{$and:[
 				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
 				{rent:{$lte:myRent}}
 			]}
 			)
@@ -197,8 +197,8 @@ exports.getWithQuery = async (req, res, next) => {
 			const response = await PropertiesModel.find(
 			{$and:[
 				{city_id:req.body.query.city_id},
-				{bedroom_count:{$gte:req.body.query.bedroom_count}},
-				{bathroom_count:{$gte:req.body.query.bathroom_count}},
+				{bedroom_count:{$gte:req.body.query.bedroom_count || 0}},
+				{bathroom_count:{$gte:req.body.query.bathroom_count || 0}},
 				{property_type:req.body.query.property_type},
 				{rent:{$lte:myRent}}
 			]}
