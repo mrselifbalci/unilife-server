@@ -5,7 +5,7 @@ ObjectId = mongoose.Types.ObjectId;
 
 exports.getAll =async (req,res)=>{
 	try {
-		const { page = 1, limit } = req.query;
+		const { page = 1, limit=10 } = req.query;
 
 		const data = await PropertiesModel.find()
 		    .populate('city_id','name')
@@ -14,7 +14,7 @@ exports.getAll =async (req,res)=>{
 			.sort({ createdAt: -1 })
 		const total = await PropertiesModel.find().count();
 		const pages = limit === undefined ? 1 : Math.ceil(total / limit);
-		res.json({ total: total, pages, status: 200, data });
+		res.json({ total: total, totalPages:pages,currentPage:+page, status: 200, data });
 	} catch (error) {
 		res.status(500).json(error);
 	}
@@ -122,7 +122,8 @@ exports.getPropertiesByCityId = async (req, res) => {
 		],
 		(err,response)=>{
 		if(err)res.json(err);
-		res.json({status: 200, total,city_name,response })
+		const pages = limit === undefined ? 1 : Math.ceil(total / limit);
+		res.json({total,totalPages:pages,currentPage:+page,city_name,status: 200,response })
 	}) 
 
 

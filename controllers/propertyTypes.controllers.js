@@ -31,7 +31,7 @@ exports.getAll = async (req, res, next) => {
 	(err,response)=>{
 	if(err)res.json(err);
 	const pages = limit === undefined ? 1 : Math.ceil(total / limit);
-	res.json({ total,pages, status: 200, response })
+	res.json({ total,totalPages:pages,currentPage:+page, status: 200, response })
 }) 
 }
 

@@ -10,7 +10,7 @@ exports.getAllSubscriptions =async (req,res)=>{
 			.sort({ createdAt: -1 })
 		const total = await SubscriptionsModel.find().count();
 		const pages = limit === undefined ? 1 : Math.ceil(total / limit);
-		res.json({ total: total, pages, status: 200, data });
+		res.json({ total: total, totalPages:pages,currentPage:+page, status: 200, data });
 	} catch (error) {
 		res.status(500).json(error);
 	}
