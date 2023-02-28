@@ -37,15 +37,14 @@ exports.create = async (req, res) => {
 
 
 exports.getSingleSubscription = async (req, res) => {
-	await SubscriptionsModel.findOne({ _id: req.params.id }, (err, data) => {
-		if (err) {
-			res.json({ message: err }); 
-		} else {
-			res.json(data)
-			
-		}   
-	}).clone()
-}
+	try {
+	  const subscription = await SubscriptionsModel.findOne({ _id: req.params.id });
+	  res.json(subscription);
+	} catch (err) {
+	  res.json({ message: err.message });
+	}
+  };
+  
 
 
 exports.updateSubscription = async (req, res) => {

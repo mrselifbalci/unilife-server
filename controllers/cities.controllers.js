@@ -60,6 +60,10 @@ exports.create = async (req, res) => {
 
 
 exports.getSingleCity = async (req, res) => {
+	if (!ObjectId.isValid(req.params.id)) {
+		res.json({message:"Invalid id"})
+		return;
+	  }
 
 	await CitiesModel.aggregate(
 		[

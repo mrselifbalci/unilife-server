@@ -69,59 +69,55 @@ exports.getSingleUserById = async (req, res) => {
 
 
 exports.createUser = async (req, res) => {
-			const {
-				username,
-				email,
-				password,
-				image_url,
-				is_active,
-				role
-			} = req.body;
-			await UsersModel.countDocuments({ "email": email },async function(err,count){
-				if(count>0){
-                  res.json({status:409,message:"This email exists!"})
-				}else{
-					const salt = await bcrypt.genSalt();
-					const hashedPassword = await bcrypt.hash(password, salt);
-			
-					const newUser = await new UsersModel({
-						username,
-						email,
-						password:hashedPassword,
-						image_url,
-						is_active,
-						role
-					});
-					newUser
-						.save()
-						.then(async response=>{
-							await UsersModel.aggregate(
-								[
-									{
-										$match: { _id: mongoose.Types.ObjectId(response._id) }
-									},
-									{
-										$sort:
-										{
-										 createdAt: -1
-										} 
-									}, 
-									{
-										$project:{
-											username:true,email:true,password:true,
-											is_active:true,createdAt:true,updatedAt:true,image_url:true
-										}
-									},
-								],
-								(err,data)=>{ 
-								if(err)res.json(err); 
-								res.json({data})
-							})
-						})
-				}
-			}).clone()
+	const {
+	  username,
+	  email,
+	  password,
+	  image_url,
+	  is_active,
+	  role
+	} = req.body;
+	
+	try {
+	  const userExists = await UsersModel.countDocuments({ "email": email });
+	  if (userExists > 0) {
+		res.json({ status: 409, message: "This email exists!" });
+	  } else {
+		const salt = await bcrypt.genSalt();
+		const hashedPassword = await bcrypt.hash(password, salt);
+  
+		const newUser = new UsersModel({
+		  username,
+		  email,
+		  password: hashedPassword,
+		  image_url,
+		  is_active,
+		  role
+		});
 		
-		};
+		const savedUser = await newUser.save();
+		const userData = await UsersModel.aggregate([
+		  { $match: { _id: mongoose.Types.ObjectId(savedUser._id) } },
+		  { $sort: { createdAt: -1 } }, 
+		  { $project: {
+			  username: true,
+			  email: true,
+			  password: true,
+			  is_active: true,
+			  createdAt: true,
+			  updatedAt: true,
+			  image_url: true
+			}
+		  }
+		]);
+		
+		res.json({ data: userData });
+	  }
+	} catch (err) {
+	  res.json({ message: err.message });
+	}
+  };
+  
 
 exports.login = async (req, res) => {
 	const { email, password } = req.body;

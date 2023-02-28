@@ -71,18 +71,18 @@ exports.createMany= async (req,res) => {
 
 
 
-exports.getSingleProperty = async (req, res) => {  	
-	if(!ObjectId.isValid(req.params.id))return;
-	await PropertiesModel.findOne({ _id: req.params.id }, (err, data) => {
-		if (err) {
-			res.json({ message: err }); 
-		} else {
-			res.json(data)
-			
-		}    
-	}).clone()
-    .populate('city_id')
-}
+  exports.getSingleProperty = async (req, res) => {
+	if (!ObjectId.isValid(req.params.id)) {
+	  return;
+	}
+	try {
+	  const property = await PropertiesModel.findOne({ _id: req.params.id }).populate('city_id');
+	  res.json(property);
+	} catch (err) {
+	  res.json({ message: err.message });
+	}
+  };
+  
 
  
 
