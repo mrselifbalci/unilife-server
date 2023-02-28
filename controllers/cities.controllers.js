@@ -61,7 +61,7 @@ exports.create = async (req, res) => {
 
 exports.getSingleCity = async (req, res) => {
 	if (!ObjectId.isValid(req.params.id)) {
-		res.json({message:"Invalid id"})
+		res.json({message:"Invalid city id"})
 		return;
 	  }
 
@@ -98,12 +98,20 @@ exports.getSingleCity = async (req, res) => {
 
 
 exports.updateCity = async (req, res) => {
+	if (!ObjectId.isValid(req.params.id)) {
+		res.json({message:"Invalid city id"})
+		return;
+	  }
     await CitiesModel.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body })
     .then((data) => res.json({ message: 'Successfully updated', data }))
     .catch((err) => res.json({ message: err }));
 }
 
 exports.deleteCity = async (req, res) => {
+	if (!ObjectId.isValid(req.params.id)) {
+		res.json({message:"Invalid city id"})
+		return;
+	  }
     await CitiesModel.findByIdAndDelete({ _id: req.params.id })
 	.then((data) => res.json(data))
 	.catch((err) => res.json({ message: err }));
