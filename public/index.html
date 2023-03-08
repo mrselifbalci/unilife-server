@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/style.css"/>
+    <title>UniLife Server</title>
+</head>
+<body>
+    <header>
+        <h3>Welcome to UniLife Server</h3>
+    </header>
+    <main>
+        <div id="sidebar">
+            <div id="general-info">
+                <a href="#pagination">Pagination</a>
+            </div>
+            <div id="endpoint-list">
+                <h3>API ENDPOINTS</h3>
+                <div class="endpoint-item">
+                    <a href="#all-cities">Cities</a>
+                    <div class="sub-items">
+                        <a href="#all-cities">All Cities</a>
+                        <a>Single City</a>
+                    </div>
+                </div>
+                <div class="endpoint-item">
+                    <a href="#properties">Properties</a>
+                    <div class="sub-items">
+                        <a>All Properties</a>
+                        <a>Single Property</a>
+                        <a>All Properties in One City</a>
+                        <a>Filter Properties with Query</a>
+                    </div>
+                </div>
+                <div class="endpoint-item">
+                    <a href="#property-types">Property Types</a>
+                    <div class="sub-items">
+                        <a>All Property Types</a>
+                    </div>
+                </div>
+                <div class="endpoint-item">
+                    <a href="#property-types">Subscriptions</a>
+                    <div class="sub-items">
+                        <a>Create a subscription</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="right-side">
+            <table>
+                <tr id="pagination">
+                  <td>
+                    <div class="all-left">
+                        <h3>Pagination</h3>
+                        <p>The API will automatically paginate responses, limiting the number of documents returned per page to 10 by default. You can adjust the page size by including the "limit" parameter in the URL. For instance, to retrieve 5 documents per page, append "?limit=5" to the URL.</p>
+                        <p>To access different pages, include the "page" parameter in the URL. If you don't specify a page number, the API will return the first page. For example, to retrieve the second page, append "?page=2" to the URL.</p>
+                        <p>If you wish to include both the limit and page parameters, separate them with an ampersand "&" in the URL.</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="all-right">
+                        <a href="https://unilife-server.herokuapp.com/cities?limit=5" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5</a> 
+                        <a href="https://unilife-server.herokuapp.com/cities?limit=5&page=2" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5&page=2</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="all-cities">
+                  <td>
+                    <div class="all-left">
+                        <h3>All Cities</h3>
+                        <p>Method: Post</p>
+                    </div>
+                  </td>
+                  <td>Row 2, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>Single City</h3>
+                    </div>
+                  </td>
+                  <td>Row 3, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>All Properties</h3>
+                    </div>
+                  </td>
+                  <td>Row 4, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>Single Property</h3>
+                    </div>
+                  </td>
+                  <td>Row 5, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>All Properties in One City</h3>
+                    </div>
+                  </td>
+                  <td>Row 6, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>Filter Properties with Query</h3>
+                    </div>
+                  </td>
+                  <td>Row 7, Column 2</td>
+                </tr>
+                <tr class="table-row"> 
+                  <td>
+                    <div class="all-left">
+                        <h3>All Property Types</h3>
+                    </div>
+                  </td>
+                  <td>Row 8, Column 2</td>
+                </tr>
+                <tr class="table-row">
+                  <td>
+                    <div class="all-left">
+                        <h3>Create a subscription</h3>
+                    </div>
+                  </td>
+                  <td>Row 9, Column 2</td>
+                </tr>
+              </table>
+        </div>
+
+    </main>
+    <div>
+        <button onclick="topFunction()" id="top-btn">Back to Top</button>
+    </div>
+ <script src="./javascripts/script.js"></script>
+</body>
+</html>
