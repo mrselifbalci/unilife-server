@@ -9,41 +9,41 @@
 </head>
 <body>
     <header>
-        <h3>Welcome to UniLife Server</h3>
+        <a href="index.html">Welcome to UniLife Server</a>
     </header>
     <main>
         <div id="sidebar">
             <div id="general-info">
-                <a href="#pagination">Pagination</a>
+                <a href="#pagination" class="sidebar-link">Pagination</a>
             </div>
             <div id="endpoint-list">
                 <h3>API ENDPOINTS</h3>
                 <div class="endpoint-item">
-                    <a href="#all-cities">Cities</a>
+                    <a href="#all-cities" class="sidebar-link">Cities</a>
                     <div class="sub-items">
                         <a href="#all-cities">All Cities</a>
-                        <a>Single City</a>
+                        <a href="#single-city">Single City</a>
+                    </div>
+                </div>
+                <div class="endpoint-item"> 
+                    <a href="#all-properties" class="sidebar-link">Properties</a>
+                    <div class="sub-items">
+                        <a href="#all-properties">All Properties</a>
+                        <a href="#single-property">Single Property</a>
+                        <a href="#all-properties-by-city">All Properties in One City</a>
+                        <a href="#filter-properties-with-query">Filter Properties with Query</a>
                     </div>
                 </div>
                 <div class="endpoint-item">
-                    <a href="#properties">Properties</a>
+                    <a href="#all-property-types" class="sidebar-link">Property Types</a>
                     <div class="sub-items">
-                        <a>All Properties</a>
-                        <a>Single Property</a>
-                        <a>All Properties in One City</a>
-                        <a>Filter Properties with Query</a>
+                        <a href="#all-property-types">All Property Types</a>
                     </div>
                 </div>
                 <div class="endpoint-item">
-                    <a href="#property-types">Property Types</a>
+                    <a href="#create-subscription" class="sidebar-link">Subscriptions</a>
                     <div class="sub-items">
-                        <a>All Property Types</a>
-                    </div>
-                </div>
-                <div class="endpoint-item">
-                    <a href="#property-types">Subscriptions</a>
-                    <div class="sub-items">
-                        <a>Create a subscription</a>
+                        <a href="#create-subscription">Create a subscription</a>
                     </div>
                 </div>
             </div>
@@ -51,93 +51,528 @@
         </div>
         <div id="right-side">
             <table>
+                   <!-- NEW ROW -->
                 <tr id="pagination">
                   <td>
                     <div class="all-left">
-                        <h3>Pagination</h3>
+                        <h3>PAGINATION</h3>
                         <p>The API will automatically paginate responses, limiting the number of documents returned per page to 10 by default. You can adjust the page size by including the "limit" parameter in the URL. For instance, to retrieve 5 documents per page, append "?limit=5" to the URL.</p>
                         <p>To access different pages, include the "page" parameter in the URL. If you don't specify a page number, the API will return the first page. For example, to retrieve the second page, append "?page=2" to the URL.</p>
                         <p>If you wish to include both the limit and page parameters, separate them with an ampersand "&" in the URL.</p>
+                        <p><strong>EXAMPLE:</strong></p>
+                        <div class="all-right">
+                            <a href="https://unilife-server.herokuapp.com/cities?limit=5" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5</a> 
+                            <a href="https://unilife-server.herokuapp.com/cities?limit=5&page=2" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5&page=2</a>
+                        </div>
                     </div>
                   </td>
                   <td>
-                    <div class="all-right">
-                        <a href="https://unilife-server.herokuapp.com/cities?limit=5" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5</a> 
-                        <a href="https://unilife-server.herokuapp.com/cities?limit=5&page=2" target="_blank">https://unilife-server.herokuapp.com/cities?limit=5&page=2</a>
-                    </div>
                   </td>
                 </tr>
+                   <!-- NEW ROW -->
                 <tr id="all-cities">
                   <td>
                     <div class="all-left">
-                        <h3>All Cities</h3>
-                        <p>Method: Post</p>
+                        <h3>All CITIES</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve a list of all the cities that are available in our database.</p>
+                        <p>Please note that this endpoint only supports GET requests, and you do not need to include any parameters in your request.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <a href="https://unilife-server.herokuapp.com/cities" target="_blank">https://unilife-server.herokuapp.com/cities</a>
+                        </div>
                     </div>
                   </td>
-                  <td>Row 2, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre style="word-wrap: break-word;">
+                            <code>
+{
+    "total": 20,
+    "totalPages": 2,
+    "currentPage": 1,
+    "status": 200,
+    "response": [
+    {
+    "_id": "633a96b96893d471a68cc891",
+    "name": "Newcastle",
+    "universities": "Newcastle has two universities: the Northumbria University and Newcastle University.",
+    "student_life": "Newcastle-Upon-Tyne is known as one of the best cities for students. It's a big c...",
+    "image_url": "https://a.cdn-hotels.com/gdcs/production114/d1461/2267d2c2-21e8-4964-bed0-f5bb480def60.jpg?impolicy=fcrop&w=800&h=533&q=medium",
+    "createdAt": "2022-10-03T08:00:57.480Z",
+    "updatedAt": "2022-10-03T08:00:57.480Z",
+    "property_count": 8
+    },
+    ... 
+    ... 
+    ]
+} 
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="single-city" class="table-row">
                   <td>
                     <div class="all-left">
-                        <h3>Single City</h3>
+                        <h3>SINGLE CITY</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve information about a single city by specifying the city_id parameter in the URL.</p>
+                        <p>If the city_id parameter does not match any cities in our database, the API will return a 404 Not Found response.</p>
+                        <p>Please note that this endpoint only supports GET requests, and you should replace {city_id} in the URL with the actual ID of the city you want to retrieve.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <p>https://unilife-server.herokuapp.com/cities/{city_id}</p>
+                            <a href="https://unilife-server.herokuapp.com/cities/633a96b96893d471a68cc891" target="_blank">https://unilife-server.herokuapp.com/cities/633a96b96893d471a68cc891</a> 
+                        </div>
                     </div>
                   </td>
-                  <td>Row 3, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+                            <code>
+{
+    "data": [
+    {
+    "_id": "633a96b96893d471a68cc891",
+    "name": "Newcastle",
+    "universities": "Newcastle has two universities: the Northumbria University and Newcastle University.",
+    "student_life": "Newcastle-Upon-Tyne is known as one of the best cities for students. It's a big city in a small space which gives students the perks of exciting city life at the same time as being compact and friendly. Everything is within walking distance, the city is beautiful and the people are lovely.",
+    "image_url": "https://a.cdn-hotels.com/gdcs/production114/d1461/2267d2c2-21e8-4964-bed0-f5bb480def60.jpg?impolicy=fcrop&w=800&h=533&q=medium",
+    "createdAt": "2022-10-03T08:00:57.480Z",
+    "updatedAt": "2022-10-03T08:00:57.480Z",
+    "property_count": 8
+    }
+    ]
+}
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="all-properties" class="table-row">
                   <td>
                     <div class="all-left">
-                        <h3>All Properties</h3>
+                        <h3>ALL PROPERTIES</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve a list of all the properties that are available in our database, regardless of their city.</p>
+                        <p>Please note that this endpoint only supports GET requests, and you do not need to include any parameters in your request.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <a href="https://unilife-server.herokuapp.com/properties" target="_blank">https://unilife-server.herokuapp.com/properties</a> 
+                        </div>
                     </div>
                   </td>
-                  <td>Row 4, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+                            <code>
+{
+    "total": 126,
+    "totalPages": 13,
+    "currentPage": 1,
+    "status": 200,
+    "data": [
+    {
+    "_id": "6364c5fdfff841b8724baccd",
+    "city_id": {
+    "_id": "633a95f36893d471a68cc86b",
+    "name": "Lincoln"
+    },
+    "key_features": [
+    "Energy Rating C",
+    "One Double Bedroom",
+    "Furnished to a High Standard",
+    "Lift & Secure Entrance",
+    "City Centre Location"
+    ],
+    "property_type": "Apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Lincoln. This home is perfect for professionals or students for high quality, City Centre living. Recently remodeled and tastefully furnished in true Lincoln fashion, this awesome home boasts a unique charm, with many of the original features and woodwork from its over-a-century-year-old building still intact.",
+    "bedroom_count": 7,
+    "bathroom_count": 3,
+    "deposit": 1000,
+    "rent": 2450,
+    "availability": "September",
+    "address": {
+    "street": "Lillie Walk",
+    "city": "Lincoln",
+    "postcode": "LS7 7AG"
+    },
+    "images": [
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790920/drovnx8q1xtwefhmaitl.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841080/rhem5vqt0fzyoit4wksx.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841083/vhyhjyxpmlbjwjltdgx6.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841087/gynanius5q6zlph4z6ih.jpg"
+    ],
+    "furnished": "Furnished",
+    "bedroom_prices": {
+    "bedroom_one": 370,
+    "bedroom_two": 370,
+    "bedroom_three": 360,
+    "bedroom_four": 350,
+    "bedroom_five": 350,
+    "bedroom_six": 350,
+    "bedroom_seven": 300
+    },
+    "__v": 0,
+    "createdAt": "2022-11-04T07:57:49.441Z",
+    "updatedAt": "2022-11-04T07:57:49.441Z"
+    },
+    ... 
+    ... 
+    ]
+]
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="single-property" class="table-row">
                   <td>
                     <div class="all-left">
-                        <h3>Single Property</h3>
+                        <h3>SINGLE PROPERTY</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve information about a single property by specifying the property_id parameter in the URL. </p>
+                        <p>If the property_id parameter does not match any properties in our database, the API will return a 404 Not Found response.</p>
+                        <p>Please note that this endpoint only supports GET requests, and you should replace {property_id} in the URL with the actual ID of the property you want to retrieve. </p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <p>https://unilife-server.herokuapp.com/properties/{property_id}</p> 
+                            <a href="https://unilife-server.herokuapp.com/properties/6364c5fdfff841b8724baccd" target="_blank">https://unilife-server.herokuapp.com/properties/6364c5fdfff841b8724baccd</a> 
+                        </div>
                     </div>
                   </td>
-                  <td>Row 5, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+                            <code>
+{
+    "_id": "6364c5fdfff841b8724baccd",
+    "city_id": {
+    "_id": "633a95f36893d471a68cc86b",
+    "name": "Lincoln",
+    "universities": "Lincoln is a city in the East Midlands and is one of the world's great historic cities. There are two universities, they are the University of Lincoln and Bishop Grosseteste University.",
+    "student_life": "Lincoln is officially ranked as one of the UK's safest cities, which should make your parents feel a bit better about you going off to study there. It's not a big place, but it's got style. For a student, the cost of living is pretty minimal compared to other cities.",
+    "image_url": "https://www.historic-uk.com/wp-content/uploads/2017/01/lincoln.jpg",
+    "createdAt": "2022-10-03T07:57:39.240Z",
+    "updatedAt": "2022-10-03T07:57:39.240Z",
+    "__v": 0
+    },
+    "key_features": [
+    "Energy Rating C",
+    "One Double Bedroom",
+    "Furnished to a High Standard",
+    "Lift & Secure Entrance",
+    "City Centre Location"
+    ],
+    "property_type": "Apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Lincoln. This home is perfect for professionals or students for high quality, City Centre living. Recently remodeled and tastefully furnished in true Lincoln fashion, this awesome home boasts a unique charm, with many of the original features and woodwork from its over-a-century-year-old building still intact.",
+    "bedroom_count": 7,
+    "bathroom_count": 3,
+    "deposit": 1000,
+    "rent": 2450,
+    "availability": "September",
+    "address": {
+    "street": "Lillie Walk",
+    "city": "Lincoln",
+    "postcode": "LS7 7AG"
+    },
+    "images": [
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617790920/drovnx8q1xtwefhmaitl.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841080/rhem5vqt0fzyoit4wksx.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841083/vhyhjyxpmlbjwjltdgx6.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841087/gynanius5q6zlph4z6ih.jpg"
+    ],
+    "furnished": "Furnished",
+    "bedroom_prices": {
+    "bedroom_one": 370,
+    "bedroom_two": 370,
+    "bedroom_three": 360,
+    "bedroom_four": 350,
+    "bedroom_five": 350,
+    "bedroom_six": 350,
+    "bedroom_seven": 300
+    },
+    "__v": 0,
+    "createdAt": "2022-11-04T07:57:49.441Z",
+    "updatedAt": "2022-11-04T07:57:49.441Z"
+    }
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="all-properties-by-city" class="table-row">
                   <td>
                     <div class="all-left">
-                        <h3>All Properties in One City</h3>
+                        <h3>ALL PROPERTIES IN A CITY</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve information about all properties in a city by specifying the city_id parameter in the URL.</p>
+                        <p>If the city_id parameter does not match any cities in our database, the API will return a 404 Not Found response. If there are no properties in the specified city, the API will return an empty JSON array.</p>
+                        <p>Please note that this endpoint only supports GET requests, and you should replace {city_id} in the URL with the actual ID of the city you want to retrieve properties for.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <p>https://unilife-server.herokuapp.com/properties/city/{city_id}</p>
+                            <a href="https://unilife-server.herokuapp.com/properties/city/633a96af6893d471a68cc88f" target="_blank">https://unilife-server.herokuapp.com/properties/city/633a96af6893d471a68cc88f</a>
+                        </div>
+
                     </div>
                   </td>
-                  <td>Row 6, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+
+                            <code>
+{
+    "total": 6,
+    "totalPages": 1,
+    "currentPage": 1,
+    "city_name": "Liverpool",
+    "status": 200,
+    "response": [
+    {
+    "_id": "633d45d461f49f86a21caa1e",
+    "key_features": [
+    "Cozy Fireplace",
+    "Freshly Painted",
+    "Two-car garage",
+    "Lift & Secure Entrance",
+    "City Centre Location"
+    ],
+    "property_type": "Apartment",
+    "property_description": "We are proud to bring to the market this well presented home in Liverpool. This home is perfect for professionals or students for high quality, City Centre living. Recently remodeled and tastefully furnished in true Liverpool fashion, this awesome home boasts a unique charm, with many of the original features and woodwork from its over-a-century-year-old building still intact.",
+    "bedroom_count": 4,
+    "bathroom_count": 2,
+    "deposit": 400,
+    "rent": 600,
+    "availability": "Mid-October",
+    "address": {
+    "street": "Brook Street",
+    "city": "Liverpool",
+    "postcode": "LS5 1AE"
+    },
+    "images": [
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841080/rhem5vqt0fzyoit4wksx.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841083/vhyhjyxpmlbjwjltdgx6.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841087/gynanius5q6zlph4z6ih.jpg",
+    "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841092/adufsselh6ljdk3vgesw.jpg"
+    ],
+    "furnished": "Unfurnished",
+    "bedroom_prices": {
+    "bedroom_one": 160,
+    "bedroom_two": 150,
+    "bedroom_three": 150,
+    "bedroom_four": 140
+    }
+    },
+    ...,
+    ... 
+    ]
+}    
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="filter-properties-with-query" class="table-row">
                   <td>
                     <div class="all-left">
                         <h3>Filter Properties with Query</h3>
+                        <p><strong>METHOD:</strong> POST</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>The filter endpoint allows you to retrieve properties based on certain filters. To use this endpoint, send a POST request to the API with the required city_id parameter in the request body. Additionally, you can include any of the optional parameters: bedroom_count, bathroom_count, rent, and property_type.</p>
+                        <p>When you use the filter endpoint, you can specify the minimum number of bedrooms and bathrooms you want the properties to have by including the bedroom_count and bathroom_count parameters in your request. The API will then return only those properties that meet or exceed the specified minimum number of bedrooms and bathrooms.</p>
+                        <p>Additionally, you can specify a maximum rent amount by including the rent parameter in your request. The API will then return only those properties whose rent is less than or equal to the specified maximum rent amount.</p>
+                        <p>For example, if you set bedroom_count=2, bathroom_count=1, and rent=1500 in your request, the API will only return properties that have at least 2 bedrooms, at least 1 bathroom, and a rent of no more than $1,500 per month.</p>
+                        <p>It's important to note that if you don't include any of these parameters in your request, the API will return all properties in the specified city, regardless of the number of bedrooms and bathrooms or the rent amount.</p>
+                        <p><strong>REQUEST BODY:</strong></p>
+                        <br/>
+                        <pre style="background-color: black;color:lightskyblue;">
+                            <code>
+    query={
+        city_id:"633a96b96893d471a68cc891",
+        bedroom_count:4,
+        bathroom_count:2,
+        property_type:"Detached",
+        rent:1500 
+    }
+                            </code>
+                        </pre>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <p>https://unilife-server.herokuapp.com/properties/filter</p>
+                        </div>
                     </div>
                   </td>
-                  <td>Row 7, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <p><strong>SAMPLE RESPONSE</strong></p>
+                        <pre style="word-wrap: break-word;">
+                            <code>
+{
+    "status": 200,
+    "message": "Filtered Properties",
+    "count": 2,
+    "response": [
+        {
+            "_id": "633d453061f49f86a21caa10",
+            "city_id": "633a96b96893d471a68cc891",
+            "key_features": [
+                "Modern Quartz Counter Tops",
+                "Remodelled Bathrooms",
+                "Two Reception Rooms",
+                "Lift & Secure Entrance",
+                "City Centre Location"
+            ],
+            "property_type": "Detached",
+            "property_description": "We are proud to bring to the market this well presented home in Newcastle. This home is perfect for professionals or students for high quality, City Centre living. Recently remodeled and tastefully furnished in true Newcastle fashion, this awesome home boasts a unique charm, with many of the original features and woodwork from its over-a-century-year-old building still intact.",
+            "bedroom_count": 4,
+            "bathroom_count": 2,
+            "deposit": 700,
+            "rent": 800,
+            "availability": "December",
+            "address": {
+                "street": "Keesey Street",
+                "city": "Newcastle",
+                "postcode": "NS6 2AE"
+            },
+            "images": [
+                "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840993/wzzppjcc8usmohnbwjpq.jpg",
+                "http://res.cloudinary.com/blackeagle4894/image/upload/v1617840997/rdsj2xt51tlt6rhmc7ve.jpg",
+                "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841000/dxhussdtiomttecbgmtf.jpg",
+                "http://res.cloudinary.com/blackeagle4894/image/upload/v1617841002/liyinvzeeh3kqi1fuu17.jpg"
+            ],
+            "furnished": "Unfurnished",
+            "bedroom_prices": {
+                "bedroom_one": 200,
+                "bedroom_two": 200,
+                "bedroom_three": 200,
+                "bedroom_four": 200
+            },
+            "__v": 0,
+            "createdAt": "2022-10-05T08:49:52.082Z",
+            "updatedAt": "2022-10-05T08:49:52.082Z"
+        },
+        ... 
+        ... 
+        ]
+}
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row"> 
+                     <!-- NEW ROW -->
+                <tr id="all-property-types" class="table-row"> 
                   <td>
                     <div class="all-left">
-                        <h3>All Property Types</h3>
+                        <h3>ALL PROPERTY TYPES</h3>
+                        <p><strong>METHOD:</strong> GET</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to retrieve information about all property types that are available in the database.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <a href="https://unilife-server.herokuapp.com/propertyTypes" target="_blank">https://unilife-server.herokuapp.com/propertyTypes</a>
+                        </div>
                     </div>
                   </td>
-                  <td>Row 8, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+                            <code>
+{
+    "total": 3,
+    "totalPages": 1,
+    "currentPage": 1,
+    "status": 200,
+    "response": [
+    {
+    "name": "Detached",
+    "property_count": 42
+    },
+    {
+    "name": "Semi-Detached",
+    "property_count": 21
+    },
+    {
+    "name": "Apartment",
+    "property_count": 63
+    }
+    ]
+}
+                            </code>
+                        </pre>
+                    </div>
+                  </td>
                 </tr>
-                <tr class="table-row">
+                     <!-- NEW ROW -->
+                <tr id="create-subscription" class="table-row">
                   <td>
                     <div class="all-left">
-                        <h3>Create a subscription</h3>
+                        <h3>CREATE A SUBSCRIPTION</h3>
+                        <p><strong>METHOD:</strong> POST</p>
+                        <p><strong>DESCRIPTION:</strong></p>
+                        <p>This endpoint allows you to create a subscription for a newsletter.To create a subscription, you need to include the email address in the request body </p>
+                        <p>If there was an error creating the subscription, the API will return an appropriate error response with a message describing the error.</p>
+                        <p><strong>ENDPOINT:</strong></p>
+                        <div class="all-right">
+                            <p>https://unilife-server.herokuapp.com/subscriptions</p>
+                        </div>
+                        <p><strong>REQUEST BODY:</strong></p>
+                        <br/>
+                        <pre style="background-color: black;color:lightskyblue;">
+                            <code>
+        {
+            "email":"elif@getmimo.com"
+        }
+                            </code>
+                        </pre>
                     </div>
                   </td>
-                  <td>Row 9, Column 2</td>
+                  <td>
+                    <p><strong>SAMPLE RESPONSE</strong></p>
+                    <div class="all-right">
+                        <pre>
+                            <code>
+{
+    "message": "new subscription created",
+    "data": {
+        "email": "elif@getmimo.com",
+        "_id": "640afc7671269dce4286ba63",
+        "createdAt": "2023-03-10T09:46:30.593Z",
+        "updatedAt": "2023-03-10T09:46:30.593Z",
+        "__v": 0
+    }
+}
+                            </code>
+                        </pre>
+
+                    </div>
+                  </td>
                 </tr>
               </table>
         </div>
 
     </main>
     <div>
-        <button onclick="topFunction()" id="top-btn">Back to Top</button>
+        <a href="index.html" onclick="topFunction()" id="top-btn">Back to Top</a>
     </div>
  <script src="./javascripts/script.js"></script>
 </body>

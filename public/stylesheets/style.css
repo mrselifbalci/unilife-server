@@ -1,4 +1,7 @@
-
+:root{
+  /* --highlight-color:rgb(244, 244, 159); */
+  --highlight-color:#2badad78;
+}
 *{
   margin:0;
   padding:0;
@@ -12,10 +15,13 @@ body {
 }
 
 a {
-  color: #9090aa;
+  color: #505050;
   cursor:pointer;
   text-decoration: none;
 
+}
+.sidebar-link {
+   color: #9090aa;
 }
 header{
   background-color: #f3f6fb;
@@ -102,11 +108,13 @@ td p{
 }
 .all-left{
   min-height:250px;
+  overflow: auto;
 }
 .all-right{
   display: flex;
   flex-direction: column;
   font-style:italic;
+  overflow: auto;
 }
 .all-right a{
   margin-top:10px;
@@ -151,7 +159,26 @@ td p{
   color: white;
   font-size: 20px;
   cursor:pointer;
+  text-align: center;
+  padding:20px;
 }
+
+#pagination:target,
+#all-cities:target,
+#single-city:target,
+#all-properties:target,
+#single-property:target,
+#all-properties-by-city:target,
+#filter-properties-with-query:target,
+#all-property-types:target,
+#create-subscription:target{
+  background-color:var(--highlight-color);
+}
+table td {
+  vertical-align: top;
+  padding:20px;
+}
+
 @media (max-width: 768px) {
   #sidebar{
     position:initial;
@@ -178,4 +205,5 @@ td p{
   tr{
     border-bottom: 1px solid black;
   }
+ 
 }
