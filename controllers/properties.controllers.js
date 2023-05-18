@@ -154,9 +154,13 @@ exports.removeSingleProperty = async (req, res) => {
 }; 
 
 exports.getWithQuery = async (req, res, next) => {
+	if(!req.body.query){
+		res.json({ status: 404, message: "Provide the query object." });
+		return;
+	}
 	const { city_id, property_type, bedroom_count, bathroom_count } = req.body.query;
 	const myRent = +req.body.query.rent;
-	
+
 	if (!city_id) {
 	  res.json({ status: 404, message: "Provide the city id." });
 	  return;
@@ -165,7 +169,7 @@ exports.getWithQuery = async (req, res, next) => {
 	const andConditions = [
 	  { city_id },
 	  { bedroom_count: { $gte: bedroom_count || 0 } },
-	  { bathroom_count: { $gte: bathroom_count || 0 } },
+	  { bathroom_count: { $gte: bathroom_count || 0 } }, 
 	];
   
 	if (property_type && myRent) {
