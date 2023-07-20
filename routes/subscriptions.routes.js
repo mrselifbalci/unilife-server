@@ -5,7 +5,7 @@ const subscriptionsControllers = require('../controllers/subscriptions.controlle
 
 router.get('/subscriptions', subscriptionsControllers.getAllSubscriptions);
 router.get('/subscriptions/:id', subscriptionsControllers.getSingleSubscription);
-router.post('/subscriptions', subscriptionsControllers.create);
+// router.post('/subscriptions', subscriptionsControllers.create);
 router.patch('/subscriptions/:id', subscriptionsControllers.updateSubscription);
 router.delete('/subscriptions/:id', subscriptionsControllers.deleteSubscription);   
  
