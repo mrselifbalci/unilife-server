@@ -3,8 +3,9 @@ const CitiesModel = require('../models/Cities.model')
 
 exports.getAllCities = async (req, res, next) => { 
 	const{page=1,limit=10}=req.query
-	if(typeof page!==number)return;
-	if(typeof limit!==number)return;
+	if (isNaN(page) || isNaN(limit)) {
+        return res.status(400).json({ message: 'Page and limit must be numbers' });
+    }
 	const total = await CitiesModel.find().countDocuments();
 	await CitiesModel.aggregate(
 	[ 
