@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 const CitiesModel = require('../models/Cities.model')
 
 exports.getAllCities = async (req, res, next) => { 
+	const{page=1,limit=10}=req.query
 	if(typeof page!==number)return;
 	if(typeof limit!==number)return;
-	const{page=1,limit=10}=req.query
 	const total = await CitiesModel.find().countDocuments();
 	await CitiesModel.aggregate(
 	[ 
